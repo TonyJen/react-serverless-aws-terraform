@@ -52,6 +52,3 @@ deploy/.terraform.lock.hcl
 package-lock.json
 .history/.gitignore_20220117160459
 .history/.gitignore_20220117193155
-deploy/lambdas/getTodoById.zip
-deploy/lambdas/getTodos.zip
-deploy/lambdas/sqsProcesser.zip
