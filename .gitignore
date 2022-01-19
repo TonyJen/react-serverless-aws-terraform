@@ -58,3 +58,5 @@ deploy/lambdas/sqsProcesser.zip
 .history/deploy/terraform_20220118063329.tfvars
 .history/deploy/17-route53_20220118222430.tf
 .history/deploy/17-route53_20220118222421.tf
+.history/deploy/17-route53_20220118230357.tf
+**/.history/*
