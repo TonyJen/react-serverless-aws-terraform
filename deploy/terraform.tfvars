@@ -5,6 +5,6 @@ app_name            = "tjen-react-serverless-app"
 environment         = "staging"
 common_tags         = { project = "react-serverless-aws-terraform" }
 domain_name         = "tonyjendemo.name"
-bucket_name         = "react-app-tf-state"
+bucket_name         = "tonyjendemo.name"
 
 
