@@ -59,4 +59,4 @@ deploy/lambdas/sqsProcesser.zip
 .history/deploy/17-route53_20220118222430.tf
 .history/deploy/17-route53_20220118222421.tf
 .history/deploy/17-route53_20220118230357.tf
-**/.history/*
+.history/*
