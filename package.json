@@ -18,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "apply": "cd deploy && terraform apply",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
