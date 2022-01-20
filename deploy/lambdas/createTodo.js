@@ -27,7 +27,7 @@ exports.handler = function(event, context, callback) {
         'identityId': event.requestContext.identity.cognitoIdentityId,
         'name': JSON.parse(event.body).name,
         'description': JSON.parse(event.body).description,
-        'source': 'labmda'
+        'source': 'lambda'
     }; 
         
     var msg = { 

@@ -131,7 +131,7 @@ resource "aws_iam_role_policy_attachment" "basicExecution" {
 }
 
 resource "aws_iam_role_policy_attachment" "SQSQueueExecution" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole "
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole"
   role       = aws_iam_role.lambda_exec.id
 }
 
