@@ -64,17 +64,6 @@ yarn start # visit app at http://localhost:3000/
 - Approve email validation requests from [AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html)
 - Add two DNS A records to point `<your_custom_domain>`, and `www.<your_custom_domain>` to the associated CloudFront distirubtions. See reference documentation [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
 - Invalidate CloudFront cache on content updates. See tutorial [here](https://www.alexhyett.com/terraform-s3-static-website-hosting/)
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-If you find this project helpful, please give a :star: or even better buy me a coffee :coffee: :point_down: because I'm a caffeine addict :sweat_smile:
-
-<a href="https://www.buymeacoffee.com/matlau" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
