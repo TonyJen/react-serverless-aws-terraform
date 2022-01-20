@@ -125,12 +125,12 @@ resource "aws_iam_role" "lambda_exec" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "basic" {
+resource "aws_iam_role_policy_attachment" "basicExecution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   role       = aws_iam_role.lambda_exec.id
 }
 
-resource "aws_iam_role_policy_attachment" "basic" {
+resource "aws_iam_role_policy_attachment" "SQSQueueExecution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole "
   role       = aws_iam_role.lambda_exec.id
 }
