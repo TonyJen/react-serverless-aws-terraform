@@ -1,10 +1,70 @@
 
-# get todos lambda
+# get lambdas
 data "archive_file" "get_todos_zip" {
   type        = "zip"
   source_file = "lambdas/getTodos.js"
   output_path = "lambdas/getTodos.zip"
 }
+
+data "archive_file" "get_comments_zip" {
+  type        = "zip"
+  source_file = "lambdas/getComments.js"
+  output_path = "lambdas/getComments.zip"
+}
+
+data "archive_file" "get_likes_zip" {
+  type        = "zip"
+  source_file = "lambdas/getLikes.js"
+  output_path = "lambdas/getLikes.zip"
+}
+
+# Create lambdas
+data "archive_file" "create_todo_zip" {
+  type        = "zip"
+  source_file = "lambdas/createTodo.js"
+  output_path = "lambdas/createTodo.zip"
+}
+
+data "archive_file" "create_comment_zip" {
+  type        = "zip"
+  source_file = "lambdas/createComment.js"
+  output_path = "lambdas/createComment.zip"
+}
+
+data "archive_file" "create_like_zip" {
+  type        = "zip"
+  source_file = "lambdas/createLike.js"
+  output_path = "lambdas/createLike.zip"
+}
+
+# Delete lambdas
+data "archive_file" "delete_comment_by_id_zip" {
+  type        = "zip"
+  source_file = "lambdas/deleteCommentById.js"
+  output_path = "lambdas/deleteCommentById.zip"
+}
+
+data "archive_file" "delete_like_by_id_zip" {
+  type        = "zip"
+  source_file = "lambdas/deleteLikeById.js"
+  output_path = "lambdas/deleteLikeById.zip"
+}
+
+data "archive_file" "delete_todo_by_id_zip" {
+  type        = "zip"
+  source_file = "lambdas/deleteTodoById.js"
+  output_path = "lambdas/deleteTodoById.zip"
+}
+
+# Update lambda
+
+data "archive_file" "update_todo_by_id_zip" {
+  type        = "zip"
+  source_file = "lambdas/updateTodoById.js"
+  output_path = "lambdas/updateTodoById.zip"
+}
+
+# Resources
 
 resource "aws_lambda_function" "get_todos" {
   function_name    = "GetTodos"
