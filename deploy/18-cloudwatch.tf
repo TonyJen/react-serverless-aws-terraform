@@ -1,6 +1,6 @@
 resource "aws_cloudwatch_log_group" "process_queue_lambda" {
   name              = "process-queue-function-cloudwatch-log-group"
-  retention_in_days = 1
+  retention_in_days = 60
 
   tags = {
     Environment = var.environment
@@ -9,7 +9,7 @@ resource "aws_cloudwatch_log_group" "process_queue_lambda" {
 }
 resource "aws_cloudwatch_log_group" "example" {
   name              = "/aws/lambda/${aws_lambda_function.process_queue.function_name}"
-  retention_in_days = 1
+  retention_in_days = 60
 }
 
 resource "aws_iam_policy" "lambda_logging" {
