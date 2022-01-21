@@ -47,7 +47,7 @@ resource "aws_lambda_event_source_mapping" "map_sqs_queue" {
 
 resource "aws_iam_role_policy" "lambda_sqs_policy" {
   name = "lambda_sqs_policy"
-  role = aws_iam_role.lambda_exec.id
+  role = aws_iam_role.queue_processer_lambda.name
 
   policy = <<EOF
 {
@@ -81,6 +81,7 @@ resource "aws_iam_role_policy" "lambda_sqs_policy" {
                 "dynamodb:PutItem"
             ],
             "Resource": [
+              "${aws_dynamodb_table.sqsRequests.arn}*",
               "${aws_dynamodb_table.todos.arn}*",
               "${aws_dynamodb_table.comments.arn}*",
               "${aws_dynamodb_table.likes.arn}*"
