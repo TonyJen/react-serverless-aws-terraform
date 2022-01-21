@@ -21,10 +21,10 @@ exports.handler = async function(event, context, callback) {
       TableName: "sqsRequests",
       Item: {
         todoId: { S: body.requestId },
-        identityId: { S: body.identity.cognitoIdentityId },
-        name: { S: JSON.parse(body).name },
-        description: { S: JSON.parse(body).description },
-        source: { S: JSON.parse(body).source }
+        identityId: { S: body.identityId },
+        name: { S: body.name },
+        description: { S: body.description },
+        source: { S: body.source }
       }
     };
        // Call DynamoDB to add the item to the table
