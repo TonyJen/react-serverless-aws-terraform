@@ -20,7 +20,7 @@ exports.handler = async function(event, context, callback) {
     const params = {
       TableName: "sqsRequests",
       Item: {
-        todoId: { S: body.requestId },
+        todoId: { S: body.todoId },
         identityId: { S: body.identityId },
         name: { S: body.name },
         description: { S: body.description },
