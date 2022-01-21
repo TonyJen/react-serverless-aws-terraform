@@ -44,3 +44,49 @@ resource "aws_lambda_event_source_mapping" "map_sqs_queue" {
   event_source_arn = aws_sqs_queue.app_queue.arn
   function_name    = aws_lambda_function.process_queue.arn
 }
+
+resource "aws_iam_role_policy" "lambda_sqs_policy" {
+  name = "lambda_sqs_policy"
+  role = aws_iam_role.lambda_exec.id
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListAndDescribe",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:List*",
+                "dynamodb:DescribeReservedCapacity*",
+                "dynamodb:DescribeLimits",
+                "dynamodb:DescribeTimeToLive"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SpecificTable",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:BatchGet*",
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTable",
+                "dynamodb:Get*",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:BatchWrite*",
+                "dynamodb:CreateTable",
+                "dynamodb:Delete*",
+                "dynamodb:Update*",
+                "dynamodb:PutItem"
+            ],
+            "Resource": [
+              "${aws_dynamodb_table.todos.arn}*",
+              "${aws_dynamodb_table.comments.arn}*",
+              "${aws_dynamodb_table.likes.arn}*"
+            ]
+        }
+    ]
+}
+EOF
+}

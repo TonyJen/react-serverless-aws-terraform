@@ -12,19 +12,21 @@ const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 exports.handler = async function(event, context, callback) {
   let responseCode = 200;
   let responseBody = "";
-
+  console.log(event.Records);
+  
   event.Records.forEach(record => {
     const { body } = record;
     console.log(body);
+    console.log(JSON.parse(body).todoId)
 
-    let params = {
+    const params = {
       TableName: "sqsRequests",
       Item: {
-        todoId: { S: record.todoId },
-        identityId: { S: record.identityId },
-        name: { S: record.name },
-        description: { S: record.description },
-        source: { S: record.source }
+        todoId: { S: JSON.parse(body).todoId },
+        identityId: { S: JSON.parse(body).identityId },
+        name: { S: JSON.parse(body).name },
+        description: { S: JSON.parse(body).description },
+        source: { S: JSON.parse(body).source }
       }
     };
        // Call DynamoDB to add the item to the table
