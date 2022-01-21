@@ -43,7 +43,7 @@ resource "aws_dynamodb_table" "sqsRequests" {
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
-    name = "todiId"
+    name = "todoId"
     type = "S"
   }
   attribute {
