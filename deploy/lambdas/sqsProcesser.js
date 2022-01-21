@@ -17,14 +17,14 @@ exports.handler = async function(event, context, callback) {
     const { body } = record;
     console.log(body);
 
-    const params = {
+    let params = {
       TableName: "sqsRequests",
       Item: {
-        todoId: { S: body.todoId },
-        identityId: { S: body.identityId },
-        name: { S: body.name },
-        description: { S: body.description },
-        source: { S: body.source }
+        todoId: { S: record.todoId },
+        identityId: { S: record.identityId },
+        name: { S: record.name },
+        description: { S: record.description },
+        source: { S: record.source }
       }
     };
        // Call DynamoDB to add the item to the table
