@@ -6,7 +6,7 @@ import { Auth, API } from "aws-amplify";
 const { Content } = Layout;
 
 const LoginPage = () => {
-  const username = "matlau";
+  const username = "user";
   const password = "SuperSecretPa55owrd!";
 
   const handleLoginOnSubmit = async e => {
