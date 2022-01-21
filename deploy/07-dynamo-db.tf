@@ -46,22 +46,9 @@ resource "aws_dynamodb_table" "sqsRequests" {
     name = "todoId"
     type = "S"
   }
-  attribute {
-    name = "identityId"
-    type = "S"
-  }
-  attribute {
-    name = "name"
-    type = "S"
-  }
-  
-  attribute {
-    name = "description"
-    type = "S"
-  }
 
   attribute {
-    name = "source"
+    name = "identityId"
     type = "S"
   }
 

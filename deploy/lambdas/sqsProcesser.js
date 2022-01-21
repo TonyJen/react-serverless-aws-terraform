@@ -12,16 +12,6 @@ const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 exports.handler = async function(event, context, callback) {
   let responseCode = 200;
   let responseBody = "";
-  const params = {
-    TableName: "sqsRequests",
-    Item: {
-      todoId: { S: event.requestContext.requestId },
-      identityId: { S: event.requestContext.identity.cognitoIdentityId },
-      name: { S: JSON.parse(event.body).name },
-      description: { S: JSON.parse(event.body).description },
-      source: { S: JSON.parse(event.body).source }
-    }
-  };
 
   event.Records.forEach(record => {
     const { body } = record;
