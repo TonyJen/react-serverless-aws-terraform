@@ -190,15 +190,30 @@ resource "aws_iam_role_policy_attachment" "basicExecution" {
   role       = aws_iam_role.lambda_exec.id
 }
 
-resource "aws_iam_role_policy_attachment" "SQSQueueExecution" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSQSFullAccess "
+resource "aws_iam_role_policy" "sqspolicy" {
+  name = "sqs_policy"
   role       = aws_iam_role.lambda_exec.id
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "sqs:*"
+            ],
+            "Resource": [
+                "arn:aws:sqs:us-east-1:*:*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+EOF
 }
 
 resource "aws_iam_role_policy" "lambda_policy" {
   name = "lambda_policy"
   role = aws_iam_role.lambda_exec.id
-
   policy = <<EOF
 {
     "Version": "2012-10-17",

@@ -24,6 +24,7 @@ exports.handler = async function(event, context, callback) {
       Item: {
         todoId: { S: JSON.parse(body).todoId },
         identityId: { S: JSON.parse(body).identityId },
+        timeStamp: { S: new Date().toISOString() },
         name: { S: JSON.parse(body).name },
         description: { S: JSON.parse(body).description },
         source: { S: JSON.parse(body).source }
