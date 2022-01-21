@@ -35,6 +35,43 @@ resource "aws_dynamodb_table" "comments" {
   }
 }
 
+resource "aws_dynamodb_table" "sqsRequests" {
+  name             = "sqsRequests"
+  billing_mode     = "PAY_PER_REQUEST"
+  hash_key         = "todoId"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
+
+  attribute {
+    name = "todiId"
+    type = "S"
+  }
+  attribute {
+    name = "identityId"
+    type = "S"
+  }
+  attribute {
+    name = "name"
+    type = "S"
+  }
+  
+  attribute {
+    name = "description"
+    type = "S"
+  }
+
+  attribute {
+    name = "source"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "identityIdIndex"
+    hash_key        = "identityId"
+    projection_type = "ALL"
+  }
+}
+
 resource "aws_dynamodb_table" "likes" {
   name             = "likes"
   billing_mode     = "PAY_PER_REQUEST"
