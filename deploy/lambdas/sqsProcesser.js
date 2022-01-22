@@ -17,7 +17,6 @@ exports.handler = async function(event, context, callback) {
   event.Records.forEach(record => {
     const { body } = record;
     console.log(body);
-    console.log(JSON.parse(body).todoId)
 
     const params = {
       TableName: "sqsRequests",
