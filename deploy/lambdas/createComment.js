@@ -1,5 +1,6 @@
 // Load the AWS SDK for Node.js
 const AWS = require("aws-sdk");
+const sqs = new AWS.SQS();
 
 // Set the region
 AWS.config.update({ region: "us-east-1" });
@@ -20,6 +21,30 @@ exports.handler = function(event, context, callback) {
       todoId: { S: JSON.parse(event.body).todoId }
     }
   };
+
+  let body = {
+    'commentId': event.requestContext.requestId,
+    'identityId': event.requestContext.identity.cognitoIdentityId,
+    'username': JSON.parse(event.body).username,
+    'content': JSON.parse(event.body).content,
+    'todoId': JSON.parse(event.body).todoId,
+    'source': 'lambda'
+  }; 
+
+  let msg = { 
+    MessageBody: JSON.stringify(body),
+    QueueUrl: 'https://sqs.us-east-1.amazonaws.com/804360271453/tjen-react-serverless-app-queue'
+  };
+
+  var statusCode = '200';
+  var statusMsg = 'OK';
+
+  sqs.sendMessage(msg, function(err, data) {
+    if (err) {
+        statusCode = '500';
+        statusMsg = err;
+    }
+  }).promise();
 
   // Call DynamoDB to add the item to the table
   ddb.putItem(params, function(err, data) {

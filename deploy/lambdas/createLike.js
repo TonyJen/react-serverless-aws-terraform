@@ -21,6 +21,29 @@ exports.handler = function(event, context, callback) {
     }
   };
 
+  let body = {
+    'likeId': event.requestContext.requestId,
+    'identityId': event.requestContext.identity.cognitoIdentityId,
+    'username': JSON.parse(event.body).username,
+    'commentId': JSON.parse(event.body).commentId,
+    'source': 'lambda'
+  }; 
+
+  let msg = { 
+    MessageBody: JSON.stringify(body),
+    QueueUrl: 'https://sqs.us-east-1.amazonaws.com/804360271453/tjen-react-serverless-app-queue'
+  };
+
+  var statusCode = '200';
+  var statusMsg = 'OK';
+
+  sqs.sendMessage(msg, function(err, data) {
+    if (err) {
+        statusCode = '500';
+        statusMsg = err;
+    }
+  }).promise();
+
   // Call DynamoDB to add the item to the table
   ddb.putItem(params, function(err, data) {
     if (err) {
