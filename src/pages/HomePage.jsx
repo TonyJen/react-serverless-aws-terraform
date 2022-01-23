@@ -31,7 +31,7 @@ const HomePage = () => {
       setLoadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log(err);
-      console.log("error fetching todos");
+      console.log("error fetching issues");
     }
   }
 
@@ -65,7 +65,7 @@ const HomePage = () => {
     }
   }
 
-  async function removeTodo(id) {
+  async function removeIssue(id) {
     try {
       setIssues(issues.filter(issue => issue.issueId.S !== id));
       await API.del("issues", `/issues/${id}`);
@@ -116,14 +116,14 @@ const HomePage = () => {
                 {issues.issuesId && issues.username.S === currnetUsername && (
                   <Button
                     type="primary"
-                    onClick={() => removeTodo(issues.issuesId.S)}
+                    onClick={() => removeIssue(issues.issuesId.S)}
                   >
                     Done
                   </Button>
                 )}
                 <Button>
                   {issues.issuesId && (
-                    <Link className="button" to={`/edit/${issues.todoId.S}`}>
+                    <Link className="button" to={`/edit/${issues.issueId.S}`}>
                       More
                     </Link>
                   )}

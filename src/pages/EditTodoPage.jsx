@@ -6,14 +6,14 @@ import CommentsList from "../components/CommentsList";
 
 const { Content } = Layout;
 
-const EditTodoPage = ({ location, history }) => {
+const EditIssuePage = ({ location, history }) => {
   // form state
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
 
-  // todo state
+  // issue state
   const initialIssueState = { name: "", description: "" };
-  const [issue, setTodo] = useState(initialIssueState);
+  const [issue, setIssue] = useState(initialIssueState);
 
   // loading state
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -23,16 +23,16 @@ const EditTodoPage = ({ location, history }) => {
 
   const issueId = location.pathname.split("/")[2];
 
-  async function fetchTodo() {
+  async function fetchIssue() {
     try {
       const res = await API.get("issues", `/issues/${issueId}`);
-      const todo = res.Item;
-      const name = todo.name.S;
-      const description = todo.description.S;
-      setTodo({ name, description });
+      const issue = res.Item;
+      const name = issue.name.S;
+      const description = issue.description.S;
+      setIssue({ name, description });
       setLoadingComplete({ loadingComplete: true });
     } catch (err) {
-      console.log("error fetching todo");
+      console.log("error fetching issue");
     }
   }
 
@@ -46,7 +46,7 @@ const EditTodoPage = ({ location, history }) => {
     }
   }
 
-  async function editTodo() {
+  async function editIssue() {
     try {
       if (!formState.name || !formState.description) return;
       const config = {
@@ -58,7 +58,7 @@ const EditTodoPage = ({ location, history }) => {
       await API.put("issue", `/issues/${issueId}`, config);
       history.push("/");
     } catch (err) {
-      console.log("error updating todo:", err);
+      console.log("error updating issue:", err);
     }
   }
 
@@ -66,13 +66,13 @@ const EditTodoPage = ({ location, history }) => {
     setFormState({ ...formState, [key]: value });
   }
 
-  // When component mounts, fetchTodo by todoId
+  // When component mounts, fetchIssue by IssueId
   useEffect(() => {
     fetchCurrnetUsername();
-    fetchTodo();
+    fetchIssue();
   }, []);
 
-  // When todo updates, set form state
+  // When issue updates, set form state
   useEffect(() => {
     if (issue.name) {
       const name = issue.name;
@@ -106,12 +106,12 @@ const EditTodoPage = ({ location, history }) => {
                 placeholder="Description"
                 style={styles.input}
               />
-              <Button onClick={editTodo} type="primary" style={styles.submit}>
+              <Button onClick={editIssue} type="primary" style={styles.submit}>
                 Save
               </Button>
             </div>
 
-            <Card title={issue.name} style={{ wtodoIdth: 300 }}>
+            <Card title={issue.name} style={{ width: 300 }}>
               <p>{issue.description}</p>
               <Button>
                 <Link className="button" to="/">
@@ -142,4 +142,4 @@ const styles = {
   }
 };
 
-export default EditTodoPage;
+export default EditIssuePage;

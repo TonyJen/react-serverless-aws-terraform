@@ -21,7 +21,7 @@ exports.handler = async function(event, context, callback) {
     const params = {
       TableName: "sqsRequests",
       Item: {
-        todoId: { S: JSON.parse(body).todoId },
+        issueId: { S: JSON.parse(body).issueId },
         identityId: { S: JSON.parse(body).identityId },
         timeStamp: { S: new Date().toISOString() },
         name: { S: JSON.parse(body).name },

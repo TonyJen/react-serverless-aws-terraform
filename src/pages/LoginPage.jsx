@@ -22,7 +22,7 @@ const LoginPage = () => {
   const handleCallAPIOnSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await API.get("todos", "/todos");
+      const res = await API.get("issues", "/issues");
       console.log(res);
     } catch (e) {
       alert(e.message);

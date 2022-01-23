@@ -3,7 +3,7 @@ import { PageHeader, Spin, Card, Input, Button } from "antd";
 import { API } from "aws-amplify";
 import Likes from "./Likes";
 
-const CommentsList = ({ todoId, username }) => {
+const CommentsList = ({ issueId, username }) => {
   const initialFormState = { content: "" };
   const [formState, setFormState] = useState(initialFormState);
   const [comments, setComments] = useState([]);
@@ -18,7 +18,7 @@ const CommentsList = ({ todoId, username }) => {
 
   async function fetchComments() {
     try {
-      const res = await API.get("issues", `/comments?todoId=${todoId}`);
+      const res = await API.get("issues", `/comments?issueId=${issueId}`);
       setComments(res.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
@@ -31,7 +31,7 @@ const CommentsList = ({ todoId, username }) => {
       if (!formState.content) return;
       const comment = {
         ...formState,
-        todoId,
+        issueId,
         username
       };
       setFormState(initialFormState);
