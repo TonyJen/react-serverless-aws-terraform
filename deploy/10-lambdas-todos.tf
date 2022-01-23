@@ -1,9 +1,9 @@
 
 # get lambdas
-data "archive_file" "get_todos_zip" {
+data "archive_file" "get_issues_zip" {
   type        = "zip"
-  source_file = "lambdas/getTodos.js"
-  output_path = "lambdas/getTodos.zip"
+  source_file = "lambdas/getIssues.js"
+  output_path = "lambdas/getIssues.zip"
 }
 
 data "archive_file" "get_comments_zip" {
@@ -19,10 +19,10 @@ data "archive_file" "get_likes_zip" {
 }
 
 # Create lambdas
-data "archive_file" "create_todo_zip" {
+data "archive_file" "create_issue_zip" {
   type        = "zip"
-  source_file = "lambdas/createTodo.js"
-  output_path = "lambdas/createTodo.zip"
+  source_file = "lambdas/createIssue.js"
+  output_path = "lambdas/createIssue.zip"
 }
 
 data "archive_file" "create_comment_zip" {
@@ -50,67 +50,67 @@ data "archive_file" "delete_like_by_id_zip" {
   output_path = "lambdas/deleteLikeById.zip"
 }
 
-data "archive_file" "delete_todo_by_id_zip" {
+data "archive_file" "delete_issue_by_id_zip" {
   type        = "zip"
-  source_file = "lambdas/deleteTodoById.js"
-  output_path = "lambdas/deleteTodoById.zip"
+  source_file = "lambdas/deleteIssueById.js"
+  output_path = "lambdas/deleteIssueById.zip"
 }
 
 # Update lambda
 
-data "archive_file" "update_todo_by_id_zip" {
+data "archive_file" "update_issue_by_id_zip" {
   type        = "zip"
-  source_file = "lambdas/updateTodoById.js"
-  output_path = "lambdas/updateTodoById.zip"
+  source_file = "lambdas/updateIssueById.js"
+  output_path = "lambdas/updateIssueById.zip"
 }
 
 # Resources
 
-resource "aws_lambda_function" "get_todos" {
-  function_name    = "GetTodos"
-  filename         = data.archive_file.get_todos_zip.output_path
-  source_code_hash = data.archive_file.get_todos_zip.output_base64sha256
-  handler          = "getTodos.handler"
+resource "aws_lambda_function" "get_issues" {
+  function_name    = "GetIssues"
+  filename         = data.archive_file.get_issues_zip.output_path
+  source_code_hash = data.archive_file.get_issues_zip.output_base64sha256
+  handler          = "getIssues.handler"
   runtime          = "nodejs14.x"
   role             = aws_iam_role.lambda_exec.arn
 }
 
 # get todo by ID lambda
-data "archive_file" "get_todo_by_id_zip" {
+data "archive_file" "get_issue_by_id_zip" {
   type        = "zip"
-  source_file = "lambdas/getTodoById.js"
-  output_path = "lambdas/getTodoById.zip"
+  source_file = "lambdas/getIssueById.js"
+  output_path = "lambdas/getIssueById.zip"
 }
 
-resource "aws_lambda_function" "get_todo_by_id" {
-  function_name    = "GetTodoById"
-  filename         = data.archive_file.get_todo_by_id_zip.output_path
-  source_code_hash = data.archive_file.get_todo_by_id_zip.output_base64sha256
-  handler          = "getTodoById.handler"
+resource "aws_lambda_function" "get_issue_by_id" {
+  function_name    = "GetIssueById"
+  filename         = data.archive_file.get_issue_by_id_zip.output_path
+  source_code_hash = data.archive_file.get_issue_by_id_zip.output_base64sha256
+  handler          = "getIssueById.handler"
   runtime          = "nodejs14.x"
   role             = aws_iam_role.lambda_exec.arn
 }
 
-resource "aws_lambda_function" "update_todo_by_id" {
-  function_name = "UpdateTodoById"
-  filename      = "lambdas/updateTodoById.zip"
-  handler       = "updateTodoById.handler"
+resource "aws_lambda_function" "update_issue_by_id" {
+  function_name = "UpdateIssueById"
+  filename      = "lambdas/updateIssueById.zip"
+  handler       = "updateIssueById.handler"
   runtime       = "nodejs14.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
-resource "aws_lambda_function" "delete_todo_by_id" {
-  function_name = "DeleteTodoById"
-  filename      = "lambdas/deleteTodoById.zip"
-  handler       = "deleteTodoById.handler"
+resource "aws_lambda_function" "delete_issue_by_id" {
+  function_name = "DeleteIssueById"
+  filename      = "lambdas/deleteIssueById.zip"
+  handler       = "deleteIssueById.handler"
   runtime       = "nodejs14.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
-resource "aws_lambda_function" "create_todo" {
-  function_name = "CreateTodo"
-  filename      = "lambdas/createTodo.zip"
-  handler       = "createTodo.handler"
+resource "aws_lambda_function" "create_issue" {
+  function_name = "CreateIssue"
+  filename      = "lambdas/createIssue.zip"
+  handler       = "createIssue.handler"
   runtime       = "nodejs14.x"
   role          = aws_iam_role.lambda_exec.arn
 }

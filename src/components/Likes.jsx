@@ -24,7 +24,7 @@ const Likes = ({ commentId, username }) => {
           "Content-Type": "application/json"
         }
       };
-      await API.post("todos", "/likes", config);
+      await API.post("issues", "/likes", config);
       fetchLikesCountByComment(commentId);
     } catch (err) {
       console.log("error creating like:", err);
@@ -36,7 +36,7 @@ const Likes = ({ commentId, username }) => {
       .S;
     try {
       setLikes(likes.filter(like => like.likeId.S !== likeId));
-      await API.del("todos", `/likes/${likeId}`);
+      await API.del("issues", `/likes/${likeId}`);
       fetchLikesCountByComment(commentId);
     } catch (err) {
       console.log("error removing like:", err);
@@ -45,7 +45,7 @@ const Likes = ({ commentId, username }) => {
 
   const fetchLikesCountByComment = async commentId => {
     try {
-      const res = await API.get("todos", `/likes?commentId=${commentId}`);
+      const res = await API.get("issues", `/likes?commentId=${commentId}`);
       setLikes(res.Items);
     } catch (err) {
       console.log("error fetching likes");

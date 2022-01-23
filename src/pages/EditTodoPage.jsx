@@ -12,8 +12,8 @@ const EditTodoPage = ({ location, history }) => {
   const [formState, setFormState] = useState(initialFormState);
 
   // todo state
-  const initialTodoState = { name: "", description: "" };
-  const [todo, setTodo] = useState(initialTodoState);
+  const initialIssueState = { name: "", description: "" };
+  const [issue, setTodo] = useState(initialIssueState);
 
   // loading state
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -21,11 +21,11 @@ const EditTodoPage = ({ location, history }) => {
   // current username state
   const [currnetUsername, setCurrnetUsername] = useState("");
 
-  const todoId = location.pathname.split("/")[2];
+  const issueId = location.pathname.split("/")[2];
 
   async function fetchTodo() {
     try {
-      const res = await API.get("todos", `/todos/${todoId}`);
+      const res = await API.get("issues", `/issues/${issueId}`);
       const todo = res.Item;
       const name = todo.name.S;
       const description = todo.description.S;
@@ -55,7 +55,7 @@ const EditTodoPage = ({ location, history }) => {
           "Content-Type": "application/json"
         }
       };
-      await API.put("todos", `/todos/${todoId}`, config);
+      await API.put("issue", `/issues/${issueId}`, config);
       history.push("/");
     } catch (err) {
       console.log("error updating todo:", err);
@@ -74,12 +74,12 @@ const EditTodoPage = ({ location, history }) => {
 
   // When todo updates, set form state
   useEffect(() => {
-    if (todo.name) {
-      const name = todo.name;
-      const description = todo.description;
+    if (issue.name) {
+      const name = issue.name;
+      const description = issue.description;
       setFormState({ name, description });
     }
-  }, [todo]);
+  }, [issue]);
 
   return (
     <div>
@@ -111,15 +111,15 @@ const EditTodoPage = ({ location, history }) => {
               </Button>
             </div>
 
-            <Card title={todo.name} style={{ wtodoIdth: 300 }}>
-              <p>{todo.description}</p>
+            <Card title={issue.name} style={{ wtodoIdth: 300 }}>
+              <p>{issue.description}</p>
               <Button>
                 <Link className="button" to="/">
                   Back
                 </Link>
               </Button>
             </Card>
-            <CommentsList todoId={todoId} username={currnetUsername} />
+            <CommentsList issueId={issueId} username={currnetUsername} />
           </div>
         ) : (
           <Spin />

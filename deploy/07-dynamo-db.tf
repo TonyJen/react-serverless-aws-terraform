@@ -1,12 +1,12 @@
-resource "aws_dynamodb_table" "todos" {
-  name             = "todos"
+resource "aws_dynamodb_table" "issues" {
+  name             = "issues"
   billing_mode     = "PAY_PER_REQUEST"
-  hash_key         = "todoId"
+  hash_key         = "issueId"
   stream_enabled   = true
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
-    name = "todoId"
+    name = "issueId"
     type = "S"
   }
 }
@@ -30,7 +30,7 @@ resource "aws_dynamodb_table" "comments" {
 
   global_secondary_index {
     name            = "todoIdIndex"
-    hash_key        = "todoId"
+    hash_key        = "issueId"
     projection_type = "ALL"
   }
 }

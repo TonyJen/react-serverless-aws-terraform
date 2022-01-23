@@ -9,7 +9,7 @@ const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
 exports.handler = function(event, context, callback) {
   const params = {
-    TableName: "todos"
+    TableName: "issues"
   };
 
   let responseCode = 200;

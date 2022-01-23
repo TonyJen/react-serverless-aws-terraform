@@ -12,9 +12,9 @@ exports.handler = function(event, context, callback) {
   let responseCode = 200;
   let responseBody = "";
   const params = {
-    TableName: "todos",
+    TableName: "issues",
     Item: {
-      todoId: { S: event.requestContext.requestId },
+      issueId: { S: event.requestContext.requestId },
       identityId: { S: event.requestContext.identity.cognitoIdentityId },
       username: { S: JSON.parse(event.body).username },
       name: { S: JSON.parse(event.body).name },

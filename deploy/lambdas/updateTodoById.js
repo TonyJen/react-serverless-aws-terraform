@@ -8,7 +8,7 @@ AWS.config.update({ region: "us-east-1" });
 const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
 exports.handler = (event, context, callback) => {
-  const todoId = event.path.split("/")[2];
+  const issueId = event.path.split("/")[2];
   let responseCode = 200;
   let responseBody = "";
 
@@ -26,12 +26,12 @@ exports.handler = (event, context, callback) => {
       }
     },
     Key: {
-      todoId: {
-        S: todoId
+      issueId: {
+        S: issueId
       }
     },
     ReturnValues: "ALL_NEW",
-    TableName: "todos",
+    TableName: "issues",
     UpdateExpression: "SET #N = :n, #D = :d"
   };
   ddb.updateItem(params, function(err, data) {

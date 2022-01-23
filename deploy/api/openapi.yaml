@@ -3,10 +3,10 @@ info:
   title: "ReactServerless"
   version: "2020-08-20T12:57:36Z"
 paths:
-  /todos/{todoId}:
+  /issues/{issueId}:
     get:
       parameters:
-        - name: "todoId"
+        - name: "issueId"
           in: "path"
           required: true
           schema:
@@ -25,7 +25,7 @@ paths:
       security:
         - sigv4: []
       x-amazon-apigateway-integration:
-        uri: "${lambda_uri_get_todo_by_id}"
+        uri: "${lambda_uri_get_issue_by_id}"
         responses:
           default:
             statusCode: "200"
@@ -37,7 +37,7 @@ paths:
         type: "aws_proxy"
     put:
       parameters:
-        - name: "todoId"
+        - name: "issueId"
           in: "path"
           required: true
           schema:
@@ -56,7 +56,7 @@ paths:
       security:
         - sigv4: []
       x-amazon-apigateway-integration:
-        uri: "${lambda_uri_update_todo_by_id}"
+        uri: "${lambda_uri_update_issue_by_id}"
         responses:
           default:
             statusCode: "200"
@@ -88,7 +88,7 @@ paths:
         - sigv4: []
       x-amazon-apigateway-integration:
         type: "aws_proxy"
-        uri: "${lambda_uri_delete_todo_by_id}"
+        uri: "${lambda_uri_delete_issue_by_id}"
         responses:
           default:
             statusCode: "200"
@@ -413,7 +413,7 @@ paths:
           application/json: '{"statusCode": 200}'
         passthroughBehavior: "when_no_match"
         type: "mock"
-  /todos:
+  /issues:
     get:
       responses:
         200:
@@ -429,7 +429,7 @@ paths:
       security:
         - sigv4: []
       x-amazon-apigateway-integration:
-        uri: "${lambda_uri_get_todos}"
+        uri: "${lambda_uri_get_issues}"
         responses:
           default:
             statusCode: "200"
@@ -454,7 +454,7 @@ paths:
       security:
         - sigv4: []
       x-amazon-apigateway-integration:
-        uri: "${lambda_uri_create_todo}"
+        uri: "${lambda_uri_create_issue}"
         responses:
           default:
             statusCode: "200"

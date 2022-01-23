@@ -18,7 +18,7 @@ const CommentsList = ({ todoId, username }) => {
 
   async function fetchComments() {
     try {
-      const res = await API.get("todos", `/comments?todoId=${todoId}`);
+      const res = await API.get("issues", `/comments?todoId=${todoId}`);
       setComments(res.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
@@ -42,7 +42,7 @@ const CommentsList = ({ todoId, username }) => {
           "Content-Type": "application/json"
         }
       };
-      await API.post("todos", "/comments", config);
+      await API.post("issues", "/comments", config);
       fetchComments();
     } catch (err) {
       console.log("error creating comment:", err);
@@ -52,7 +52,7 @@ const CommentsList = ({ todoId, username }) => {
   async function removeComment(id) {
     try {
       setComments(comments.filter(comment => comment.commentId.S !== id));
-      await API.del("todos", `/comments/${id}`);
+      await API.del("issues", `/comments/${id}`);
     } catch (err) {
       console.log("error removing comment:", err);
     }
