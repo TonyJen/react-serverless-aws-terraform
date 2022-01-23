@@ -1,42 +1,42 @@
-resource "aws_lambda_permission" "lambda_permission_get_todos" {
+resource "aws_lambda_permission" "lambda_permission_get_issues" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_todos.function_name
+  function_name = aws_lambda_function.get_issues.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/todos"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/issues"
 }
 
-resource "aws_lambda_permission" "lambda_permission_get_todo_by_id" {
+resource "aws_lambda_permission" "lambda_permission_get_issue_by_id" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_todo_by_id.function_name
+  function_name = aws_lambda_function.get_issue_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/issues/*"
 }
 
-resource "aws_lambda_permission" "lambda_permission_delete_todo_by_id" {
+resource "aws_lambda_permission" "lambda_permission_delete_issue_by_id" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.delete_todo_by_id.function_name
+  function_name = aws_lambda_function.delete_issue_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/DELETE/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/DELETE/issues/*"
 }
 
-resource "aws_lambda_permission" "lambda_permission_update_todo_by_id" {
+resource "aws_lambda_permission" "lambda_permission_update_issue_by_id" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.update_todo_by_id.function_name
+  function_name = aws_lambda_function.update_issue_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/PUT/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/PUT/issues/*"
 }
 
-resource "aws_lambda_permission" "lambda_permission_create_todo" {
+resource "aws_lambda_permission" "lambda_permission_create_issue" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.create_todo.function_name
+  function_name = aws_lambda_function.create_issue.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/POST/todos"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/POST/issues"
 }
 
 resource "aws_lambda_permission" "lambda_permission_create_comment" {

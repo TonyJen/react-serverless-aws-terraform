@@ -68,7 +68,7 @@ paths:
         type: "aws_proxy"
     delete:
       parameters:
-        - name: "todoId"
+        - name: "issueId"
           in: "path"
           required: true
           schema:

@@ -17,7 +17,7 @@ exports.handler = function(event, context, callback) {
       identityId: { S: event.requestContext.identity.cognitoIdentityId },
       username: { S: JSON.parse(event.body).username },
       content: { S: JSON.parse(event.body).content },
-      todoId: { S: JSON.parse(event.body).todoId }
+      issueId: { S: JSON.parse(event.body).issueId }
     }
   };
 

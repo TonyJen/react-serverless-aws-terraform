@@ -75,7 +75,7 @@ resource "aws_lambda_function" "get_issues" {
   role             = aws_iam_role.lambda_exec.arn
 }
 
-# get todo by ID lambda
+# get issue by ID lambda
 data "archive_file" "get_issue_by_id_zip" {
   type        = "zip"
   source_file = "lambdas/getIssueById.js"
@@ -246,7 +246,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
                 "dynamodb:PutItem"
             ],
             "Resource": [
-              "${aws_dynamodb_table.todos.arn}*",
+              "${aws_dynamodb_table.issues.arn}*",
               "${aws_dynamodb_table.comments.arn}*",
               "${aws_dynamodb_table.likes.arn}*"
             ]

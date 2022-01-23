@@ -8,11 +8,11 @@ resource "aws_api_gateway_rest_api" "app" {
 data "template_file" "api_definition" {
   template = file("api/openapi.yaml")
   vars = {
-    lambda_uri_get_todos            = aws_lambda_function.get_todos.invoke_arn
-    lambda_uri_create_todo          = aws_lambda_function.create_todo.invoke_arn
-    lambda_uri_get_todo_by_id       = aws_lambda_function.get_todo_by_id.invoke_arn
-    lambda_uri_update_todo_by_id    = aws_lambda_function.update_todo_by_id.invoke_arn
-    lambda_uri_delete_todo_by_id    = aws_lambda_function.delete_todo_by_id.invoke_arn
+    lambda_uri_get_issues            = aws_lambda_function.get_issues.invoke_arn
+    lambda_uri_create_issue          = aws_lambda_function.create_issue.invoke_arn
+    lambda_uri_get_issue_by_id       = aws_lambda_function.get_issue_by_id.invoke_arn
+    lambda_uri_update_issue_by_id    = aws_lambda_function.update_issue_by_id.invoke_arn
+    lambda_uri_delete_issue_by_id    = aws_lambda_function.delete_issue_by_id.invoke_arn
     lambda_uri_create_comment       = aws_lambda_function.create_comment.invoke_arn
     lambda_uri_get_comments         = aws_lambda_function.get_comments.invoke_arn
     lambda_uri_delete_comment_by_id = aws_lambda_function.delete_comment_by_id.invoke_arn

@@ -82,7 +82,7 @@ resource "aws_iam_role_policy" "lambda_sqs_policy" {
             ],
             "Resource": [
               "${aws_dynamodb_table.sqsRequests.arn}*",
-              "${aws_dynamodb_table.todos.arn}*",
+              "${aws_dynamodb_table.issues.arn}*",
               "${aws_dynamodb_table.comments.arn}*",
               "${aws_dynamodb_table.likes.arn}*"
             ]

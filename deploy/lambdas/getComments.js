@@ -8,22 +8,22 @@ AWS.config.update({ region: "us-east-1" });
 const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
 exports.handler = (event, context, callback) => {
-  // if query parameter todoId is provided
-  // query comments by todoId
+  // if query parameter issueId is provided
+  // query comments by issueId
   // else, scan for all comments
   if (event.queryStringParameters) {
-    const todoId = event.queryStringParameters.todoId;
+    const issueId = event.queryStringParameters.issueId;
     let responseCode = 200;
     let responseBody = "";
 
     const params = {
       ExpressionAttributeValues: {
         ":v1": {
-          S: todoId
+          S: issueId
         }
       },
-      KeyConditionExpression: "todoId = :v1",
-      IndexName: "todoIdIndex",
+      KeyConditionExpression: "issueId = :v1",
+      IndexName: "issueIdIndex",
       TableName: "comments"
     };
     ddb.query(params, function(err, data) {

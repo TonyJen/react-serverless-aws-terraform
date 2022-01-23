@@ -24,12 +24,12 @@ resource "aws_dynamodb_table" "comments" {
   }
 
   attribute {
-    name = "todoId"
+    name = "issueId"
     type = "S"
   }
 
   global_secondary_index {
-    name            = "todoIdIndex"
+    name            = "issueIdIndex"
     hash_key        = "issueId"
     projection_type = "ALL"
   }
@@ -38,12 +38,12 @@ resource "aws_dynamodb_table" "comments" {
 resource "aws_dynamodb_table" "sqsRequests" {
   name             = "sqsRequests"
   billing_mode     = "PAY_PER_REQUEST"
-  hash_key         = "todoId"
+  hash_key         = "issueId"
   stream_enabled   = true
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
   attribute {
-    name = "todoId"
+    name = "issueId"
     type = "S"
   }
 
