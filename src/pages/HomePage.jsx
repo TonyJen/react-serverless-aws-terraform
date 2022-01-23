@@ -9,25 +9,25 @@ import { API, Auth } from "aws-amplify";
 const { Content } = Layout;
 
 const HomePage = () => {
-  const [todos, setTodos] = useState([]);
+  const [issues, setIssues] = useState([]);
   const [loadingComplete, setLoadingComplete] = useState(false);
   const [currnetUsername, setCurrnetUsername] = useState("");
-  const initialFormState = { name: "", description: "" };
+  const initialFormState = { issue: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
 
   useEffect(() => {
     fetchCurrnetUsername();
-    fetchTodos();
+    fetchIssues();
   }, []);
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
   }
 
-  async function fetchTodos() {
+  async function fetchIssues() {
     try {
-      const res = await API.get("todos", "/todos");
-      setTodos(res.Items);
+      const res = await API.get("issues", "/issues");
+      setIssues(res.Items);
       setLoadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log(err);
@@ -45,32 +45,32 @@ const HomePage = () => {
     }
   }
 
-  async function addTodo() {
+  async function addIssue() {
     try {
       if (!formState.name || !formState.description) return;
-      const todo = { ...formState, username: currnetUsername };
-      setTodos([...todos, todo]);
+      const issue = { ...formState, username: currnetUsername };
+      setIssues([...issues, issue]);
       setFormState(initialFormState);
 
       const config = {
-        body: todo,
+        body: issue,
         headers: {
           "Content-Type": "application/json"
         }
       };
-      await API.post("todos", "/todos", config);
-      fetchTodos();
+      await API.post("issue", "/issues", config);
+      fetchIssues();
     } catch (err) {
-      console.log("error creating todo:", err);
+      console.log("error creating issue:", err);
     }
   }
 
   async function removeTodo(id) {
     try {
-      setTodos(todos.filter(todo => todo.todoId.S !== id));
-      await API.del("todos", `/todos/${id}`);
+      setIssues(issues.filter(issue => issue.issueId.S !== id));
+      await API.del("issues", `/issues/${id}`);
     } catch (err) {
-      console.log("error removing todo:", err);
+      console.log("error removing issue:", err);
     }
   }
 
@@ -81,15 +81,15 @@ const HomePage = () => {
           <PageHeader
             className="site-page-header"
             title={`Welcome ${currnetUsername}`}
-            subTitle="To-do list powered by AWS serverless architecture"
+            subTitle="Issue tracking list powered by AWS serverless architecture"
             style={styles.header}
           />
         </div>
         <div>
           <Input
-            onChange={event => setInput("name", event.target.value)}
-            value={formState.name}
-            placeholder="Name"
+            onChange={event => setInput("issue", event.target.value)}
+            value={formState.issue}
+            placeholder="issue"
             style={styles.input}
           />
           <Input
@@ -98,32 +98,32 @@ const HomePage = () => {
             placeholder="Description"
             style={styles.input}
           />
-          <Button onClick={addTodo} type="primary" style={styles.submit}>
+          <Button onClick={addIssue} type="primary" style={styles.submit}>
             Add
           </Button>
         </div>
         {loadingComplete ? (
           <div>
-            {todos.map((todo, index) => (
+            {issues.map((issues, index) => (
               <Card
-                key={todo.todoId ? todo.todoId.S : index}
-                title={todo.name.S ? todo.name.S : todo.name}
+                key={issues.issuesId ? issues.issuesId.S : index}
+                title={issues.issue.S ? issues.issue.S : issues.issue}
                 style={{ width: 300 }}
               >
                 <p>
-                  {todo.description.S ? todo.description.S : todo.description}
+                  {issues.description.S ? issues.description.S : issues.description}
                 </p>
-                {todo.todoId && todo.username.S === currnetUsername && (
+                {issues.issuesId && issues.username.S === currnetUsername && (
                   <Button
                     type="primary"
-                    onClick={() => removeTodo(todo.todoId.S)}
+                    onClick={() => removeTodo(issues.issuesId.S)}
                   >
                     Done
                   </Button>
                 )}
                 <Button>
-                  {todo.todoId && (
-                    <Link className="button" to={`/edit/${todo.todoId.S}`}>
+                  {issues.issuesId && (
+                    <Link className="button" to={`/edit/${issues.todoId.S}`}>
                       More
                     </Link>
                   )}
