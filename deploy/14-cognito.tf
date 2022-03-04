@@ -33,6 +33,7 @@ resource "aws_cognito_user_pool_client" "app_user_pool_client" {
   supported_identity_providers = ["COGNITO"]
 }
 
+
 resource "aws_cognito_identity_pool" "app_identity_pool" {
   identity_pool_name               = "react_serverless_aws_terraform_identity_pool"
   allow_unauthenticated_identities = false

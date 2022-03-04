@@ -9,6 +9,10 @@ resource "aws_dynamodb_table" "todos" {
     name = "todoId"
     type = "S"
   }
+
+  server_side_encryption {
+    enabled     = "true"
+  }
 }
 
 resource "aws_dynamodb_table" "comments" {
@@ -32,6 +36,10 @@ resource "aws_dynamodb_table" "comments" {
     name            = "todoIdIndex"
     hash_key        = "todoId"
     projection_type = "ALL"
+  }
+
+  server_side_encryption {
+    enabled     = "true"
   }
 }
 
@@ -57,6 +65,10 @@ resource "aws_dynamodb_table" "sqsRequests" {
     hash_key        = "identityId"
     projection_type = "ALL"
   }
+
+  server_side_encryption {
+    enabled     = "true"
+  }
 }
 
 resource "aws_dynamodb_table" "likes" {
@@ -80,5 +92,9 @@ resource "aws_dynamodb_table" "likes" {
     name            = "commentIdIndex"
     hash_key        = "commentId"
     projection_type = "ALL"
+  }
+
+  server_side_encryption {
+    enabled     = "true"
   }
 }
