@@ -16,6 +16,8 @@ const AboutPage = () => {
           />
         </div>
         <h1>This demo demostrates aws serverless pipeline flow using React frontend and DynamoDB database backend.</h1>
+        
+        <h1>Stephanie is the greatest.</h1>
       </Content>
     </div>
   );
