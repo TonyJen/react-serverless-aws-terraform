@@ -30,6 +30,7 @@ yarn-error.log*
 # .tfstate files
 *.tfstate
 *.tfstate.*
+.history
 
 *secret.tfvars
 
