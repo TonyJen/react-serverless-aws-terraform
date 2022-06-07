@@ -108,7 +108,7 @@ const HomePage = () => {
               <Card
                 key={todo.todoId ? todo.todoId.S : index}
                 title={todo.name.S ? todo.name.S : todo.name}
-                style={{ width: 300, margin_bottom: "50 px" }}
+                style={{ width: 300, marginBottom: "50 px" }}
               >
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
