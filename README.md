@@ -5,7 +5,6 @@ A reference project to deploy a serverless, full-stack React app onto AWS with T
 A to-do list app which allows users to create, and read to-do's from DynamoDB
 
 App URL [here](https://www.mattlau.co.uk/)
-
 ![AWS Architecture](images/aws_react_serverless4.JPG)
 
 ## Pre-requisite
