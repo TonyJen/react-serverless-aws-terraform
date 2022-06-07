@@ -82,7 +82,7 @@ const CommentsList = ({ todoId, username }) => {
             <Card
               key={comment.commentId ? comment.commentId.S : index}
               title={comment.content.S}
-              style={{ width: 300 }}
+              style={styles.comment}
             >
               <p>{comment.username.S}</p>
               {comment.username.S === username && (
@@ -114,6 +114,10 @@ const styles = {
   },
   header: {
     paddingLeft: "0px"
+  },
+  comment: {
+    width: 300,
+    marginBottom: "50px"
   }
 };
 
