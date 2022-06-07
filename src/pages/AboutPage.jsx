@@ -15,7 +15,10 @@ const AboutPage = () => {
             style={styles.header}
           />
         </div>
-        <h1>This demo demostrates aws serverless pipeline flow using React frontend and DynamoDB database backend.</h1>
+        <h1>This demo demostrates aws serverless pipeline flow using React frontend and DynamoDB database backend. It will also use cognito as access control and api gameway as backend api.</h1>
+ 
+
+
         
       </Content>
     </div>
