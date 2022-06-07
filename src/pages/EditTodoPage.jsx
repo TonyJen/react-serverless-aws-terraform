@@ -139,6 +139,10 @@ const styles = {
   },
   header: {
     paddingLeft: "0px"
+  },
+  comment: {
+    width: 300,
+    marginBottom: "50px"
   }
 };
 
