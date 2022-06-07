@@ -108,7 +108,7 @@ const HomePage = () => {
               <Card
                 key={todo.todoId ? todo.todoId.S : index}
                 title={todo.name.S ? todo.name.S : todo.name}
-                style={{ width: 300, marginBottom: "50px" }}
+                style={styles.card}
               >
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
@@ -149,6 +149,10 @@ const styles = {
   },
   header: {
     paddingLeft: "0px"
+  },
+  card: {
+    width: 300,
+    marginBottom: "50px"
   }
 };
 
