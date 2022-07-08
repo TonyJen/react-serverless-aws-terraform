@@ -202,7 +202,7 @@ resource "aws_iam_role_policy" "sqspolicy" {
                 "sqs:*"
             ],
             "Resource": [
-                "arn:aws:sqs:us-east-1:*:*"
+                "${aws_sqs_queue.app_queue.arn}*"
             ],
             "Effect": "Allow"
         }
