@@ -71,7 +71,7 @@ resource "aws_lambda_function" "get_todos" {
   filename         = data.archive_file.get_todos_zip.output_path
   source_code_hash = data.archive_file.get_todos_zip.output_base64sha256
   handler          = "getTodos.handler"
-  runtime          = "nodejs14.x"
+  runtime          = "nodejs16.x"
   role             = aws_iam_role.lambda_exec.arn
 }
 
@@ -87,7 +87,7 @@ resource "aws_lambda_function" "get_todo_by_id" {
   filename         = data.archive_file.get_todo_by_id_zip.output_path
   source_code_hash = data.archive_file.get_todo_by_id_zip.output_base64sha256
   handler          = "getTodoById.handler"
-  runtime          = "nodejs14.x"
+  runtime          = "nodejs16.x"
   role             = aws_iam_role.lambda_exec.arn
 }
 
@@ -95,7 +95,7 @@ resource "aws_lambda_function" "update_todo_by_id" {
   function_name = "UpdateTodoById"
   filename      = "lambdas/updateTodoById.zip"
   handler       = "updateTodoById.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -103,7 +103,7 @@ resource "aws_lambda_function" "delete_todo_by_id" {
   function_name = "DeleteTodoById"
   filename      = "lambdas/deleteTodoById.zip"
   handler       = "deleteTodoById.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -111,7 +111,7 @@ resource "aws_lambda_function" "create_todo" {
   function_name = "CreateTodo"
   filename      = "lambdas/createTodo.zip"
   handler       = "createTodo.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -119,7 +119,7 @@ resource "aws_lambda_function" "create_comment" {
   function_name = "CreateComment"
   filename      = "lambdas/createComment.zip"
   handler       = "createComment.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -127,7 +127,7 @@ resource "aws_lambda_function" "get_comments" {
   function_name = "GetComments"
   filename      = "lambdas/getComments.zip"
   handler       = "getComments.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -135,7 +135,7 @@ resource "aws_lambda_function" "delete_comment_by_id" {
   function_name = "DeleteCommentById"
   filename      = "lambdas/deleteCommentById.zip"
   handler       = "deleteCommentById.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -143,7 +143,7 @@ resource "aws_lambda_function" "create_like" {
   function_name = "CreateLike"
   filename      = "lambdas/createLike.zip"
   handler       = "createLike.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -151,7 +151,7 @@ resource "aws_lambda_function" "get_likes" {
   function_name = "GetLikes"
   filename      = "lambdas/getLikes.zip"
   handler       = "getLikes.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
@@ -159,7 +159,7 @@ resource "aws_lambda_function" "delete_like_by_id" {
   function_name = "DeleteLikeById"
   filename      = "lambdas/deleteLikeById.zip"
   handler       = "deleteLikeById.handler"
-  runtime       = "nodejs14.x"
+  runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_exec.arn
 }
 
