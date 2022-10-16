@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PageHeader, Spin, Card, Input, Button } from "antd";
 import { API } from "aws-amplify";
 import Likes from "./Likes";
+import styled from 'styled-components';
 
 const CommentsList = ({ todoId, username }) => {
   const initialFormState = { content: "" };
@@ -11,6 +12,11 @@ const CommentsList = ({ todoId, username }) => {
   useEffect(() => {
     fetchComments();
   }, []);
+
+  const SubmitButton = styled.div`
+    margin: 10px 0;
+    margin-bottom : 20px;
+  `;
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
@@ -72,9 +78,11 @@ const CommentsList = ({ todoId, username }) => {
           placeholder="Comment"
           style={styles.input}
         />
-        <Button onClick={addComment} type="primary" style={styles.submit}>
-          Add
-        </Button>
+        <SubmitButton>
+          <Button onClick={addComment} type="primary">
+            Add
+          </Button>
+        </SubmitButton>
       </div>
       {loadingComplete ? (
         <div>
