@@ -27,7 +27,7 @@ const CommentsList = ({ todoId, username }) => {
   `;
 
   const CommentStyle = styled.div`
-    width: 300;
+    width: 300px;
     margin-bottom: 50px;
   `;
 
