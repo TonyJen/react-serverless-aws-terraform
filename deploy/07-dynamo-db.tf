@@ -15,6 +15,23 @@ resource "aws_dynamodb_table" "todos" {
   }
 }
 
+resource "aws_dynamodb_table" "issues" {
+  name             = "issues"
+  billing_mode     = "PAY_PER_REQUEST"
+  hash_key         = "issueId"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
+
+  attribute {
+    name = "issueId"
+    type = "S"
+  }
+
+  server_side_encryption {
+    enabled     = "true"
+  }
+}
+
 resource "aws_dynamodb_table" "comments" {
   name             = "comments"
   billing_mode     = "PAY_PER_REQUEST"

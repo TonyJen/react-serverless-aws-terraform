@@ -248,7 +248,8 @@ resource "aws_iam_role_policy" "lambda_policy" {
             "Resource": [
               "${aws_dynamodb_table.todos.arn}*",
               "${aws_dynamodb_table.comments.arn}*",
-              "${aws_dynamodb_table.likes.arn}*"
+              "${aws_dynamodb_table.likes.arn}*",
+              "${aws_dynamodb_table.issues.arn}*"
             ]
         }
     ]

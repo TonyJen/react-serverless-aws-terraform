@@ -86,13 +86,11 @@ const CommentsList = ({ todoId, username }) => {
         />
       </HeaderStyle>
       <div>
-        <InputStyle>
-          <Input
-            onChange={event => setInput("content", event.target.value)}
-            value={formState.content}
-            placeholder="Comment"
-          />
-        </InputStyle>
+        <Input
+          onChange={event => setInput("content", event.target.value)}
+          value={formState.content}
+          placeholder="Comment"
+        />
         <SubmitButton>
           <Button onClick={addComment} type="primary">
             Add
