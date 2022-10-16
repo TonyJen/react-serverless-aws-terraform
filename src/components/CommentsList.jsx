@@ -26,6 +26,11 @@ const CommentsList = ({ todoId, username }) => {
     padding-left: 0px;
   `;
 
+  const CommentStyle = styled.div`
+    width: 300;
+    margin-bottom: 50px;
+  `;
+
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
   }
@@ -78,7 +83,6 @@ const CommentsList = ({ todoId, username }) => {
         <PageHeader
           className="site-page-header"
           title="Comments"
-          style={styles.header}
         />
       </HeaderStyle>
       <div>
@@ -98,22 +102,23 @@ const CommentsList = ({ todoId, username }) => {
       {loadingComplete ? (
         <div>
           {comments.map((comment, index) => (
-            <Card
-              key={comment.commentId ? comment.commentId.S : index}
-              title={comment.content.S}
-              style={styles.comment}
-            >
-              <p>{comment.username.S}</p>
-              {comment.username.S === username && (
-                <Button
-                  type="primary"
-                  onClick={() => removeComment(comment.commentId.S)}
-                >
-                  Delete
-                </Button>
-              )}
-              <Likes commentId={comment.commentId.S} username={username} />
-            </Card>
+            <CommentStyle>
+              <Card
+                key={comment.commentId ? comment.commentId.S : index}
+                title={comment.content.S}
+              >
+                <p>{comment.username.S}</p>
+                {comment.username.S === username && (
+                  <Button
+                    type="primary"
+                    onClick={() => removeComment(comment.commentId.S)}
+                  >
+                    Delete
+                  </Button>
+                )}
+                <Likes commentId={comment.commentId.S} username={username} />
+              </Card>
+            </CommentStyle>
           ))}
         </div>
       ) : (
@@ -123,21 +128,5 @@ const CommentsList = ({ todoId, username }) => {
   );
 };
 
-const styles = {
-  input: {
-    margin: "10px 0"
-  },
-  submit: {
-    margin: "10px 0",
-    marginBottom: "20px"
-  },
-  header: {
-    paddingLeft: "0px"
-  },
-  comment: {
-    width: 300,
-    marginBottom: "50px"
-  }
-};
 
 export default CommentsList;
