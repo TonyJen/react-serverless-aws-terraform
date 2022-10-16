@@ -20,7 +20,11 @@ const CommentsList = ({ todoId, username }) => {
 
   const InputStyle = styled.div`
     margin: 10px 0;
-`;
+  `;
+
+  const HeaderStyle = styled.div`
+    padding-left: 0px;
+  `;
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
@@ -70,11 +74,13 @@ const CommentsList = ({ todoId, username }) => {
 
   return (
     <div>
-      <PageHeader
-        className="site-page-header"
-        title="Comments"
-        style={styles.header}
-      />
+      <HeaderStyle>
+        <PageHeader
+          className="site-page-header"
+          title="Comments"
+          style={styles.header}
+        />
+      </HeaderStyle>
       <div>
         <InputStyle>
           <Input
