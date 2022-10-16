@@ -90,6 +90,7 @@ const CommentsList = ({ todoId, username }) => {
           onChange={event => setInput("content", event.target.value)}
           value={formState.content}
           placeholder="Comment"
+          style={styles.input}
         />
         <SubmitButton>
           <Button onClick={addComment} type="primary">
@@ -124,6 +125,23 @@ const CommentsList = ({ todoId, username }) => {
       )}
     </div>
   );
+};
+
+const styles = {
+  input: {
+    margin: "10px 0"
+  },
+  submit: {
+    margin: "10px 0",
+    marginBottom: "20px"
+  },
+  header: {
+    paddingLeft: "0px"
+  },
+  comment: {
+    width: 300,
+    marginBottom: "50px"
+  }
 };
 
 
