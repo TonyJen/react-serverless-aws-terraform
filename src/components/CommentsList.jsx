@@ -18,6 +18,10 @@ const CommentsList = ({ todoId, username }) => {
     margin-bottom : 20px;
   `;
 
+  const InputStyle = styled.div`
+    margin: 10px 0;
+`;
+
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
   }
@@ -72,12 +76,13 @@ const CommentsList = ({ todoId, username }) => {
         style={styles.header}
       />
       <div>
-        <Input
-          onChange={event => setInput("content", event.target.value)}
-          value={formState.content}
-          placeholder="Comment"
-          style={styles.input}
-        />
+        <InputStyle>
+          <Input
+            onChange={event => setInput("content", event.target.value)}
+            value={formState.content}
+            placeholder="Comment"
+          />
+        </InputStyle>
         <SubmitButton>
           <Button onClick={addComment} type="primary">
             Add
