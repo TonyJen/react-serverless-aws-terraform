@@ -15,7 +15,7 @@ const CommentsList = ({ todoId, username }) => {
 
   const SubmitButton = styled.div`
     margin: 10px 0;
-    margin-bottom : 30px;
+    margin-bottom : 20px;
   `;
 
   function setInput(key, value) {
@@ -79,7 +79,7 @@ const CommentsList = ({ todoId, username }) => {
           style={styles.input}
         />
         <SubmitButton>
-          <Button onClick={addComment} type="primary" style={styles.submit}>
+          <Button onClick={addComment} type="primary">
             Add
           </Button>
         </SubmitButton>
