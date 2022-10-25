@@ -1,28 +1,28 @@
-import React from 'react';
-import { PageHeader, Layout, Button } from 'antd';
-
-import { Auth, API } from 'aws-amplify';
+import React from "react";
+import { PageHeader } from "antd";
+import { Layout, Button } from "antd";
+import { Auth, API } from "aws-amplify";
 
 const { Content } = Layout;
 
-function LoginPage() {
-  const username = 'user';
-  const password = 'SuperSecretPa55owrd!';
+const LoginPage = () => {
+  const username = "user";
+  const password = "SuperSecretPa55owrd!";
 
-  const handleLoginOnSubmit = async (e) => {
+  const handleLoginOnSubmit = async e => {
     e.preventDefault();
     try {
       await Auth.signIn(username, password);
-      alert('Logged in');
+      alert("Logged in");
     } catch (e) {
       alert(e.message);
     }
   };
 
-  const handleCallAPIOnSubmit = async (e) => {
+  const handleCallAPIOnSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await API.get('todos', '/todos');
+      const res = await API.get("todos", "/todos");
       console.log(res);
     } catch (e) {
       alert(e.message);
@@ -31,7 +31,7 @@ function LoginPage() {
 
   return (
     <div>
-      <Content style={{ padding: '0 50px' }}>
+      <Content style={{ padding: "0 50px" }}>
         <div className="site-layout-content">
           <PageHeader
             className="site-page-header"
@@ -44,19 +44,19 @@ function LoginPage() {
       </Content>
     </div>
   );
-}
+};
 
 const styles = {
   input: {
-    margin: '10px 0',
+    margin: "10px 0"
   },
   submit: {
-    margin: '10px 0',
-    marginBottom: '20px',
+    margin: "10px 0",
+    marginBottom: "20px"
   },
   header: {
-    paddingLeft: '0px',
-  },
+    paddingLeft: "0px"
+  }
 };
 
 export default LoginPage;
