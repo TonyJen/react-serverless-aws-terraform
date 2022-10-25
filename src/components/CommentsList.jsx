@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  PageHeader, Spin, Card, Input, Button,
-} from 'antd';
-import { API } from 'aws-amplify';
+import { PageHeader, Spin, Card, Input, Button } from "antd";
+import { API } from "aws-amplify";
+import Likes from "./Likes";
 import styled from 'styled-components';
-import Likes from './Likes';
 
-function CommentsList({ todoId, username }) {
-  const initialFormState = { content: '' };
+const CommentsList = ({ todoId, username }) => {
+  const initialFormState = { content: "" };
   const [formState, setFormState] = useState(initialFormState);
   const [comments, setComments] = useState([]);
   const [loadingComplete, setloadingComplete] = useState(true);
@@ -39,11 +37,11 @@ function CommentsList({ todoId, username }) {
 
   async function fetchComments() {
     try {
-      const res = await API.get('todos', `/comments?todoId=${todoId}`);
+      const res = await API.get("todos", `/comments?todoId=${todoId}`);
       setComments(res.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
-      console.log('error fetching comments');
+      console.log("error fetching comments");
     }
   }
 
@@ -53,29 +51,29 @@ function CommentsList({ todoId, username }) {
       const comment = {
         ...formState,
         todoId,
-        username,
+        username
       };
       setFormState(initialFormState);
 
       const config = {
         body: comment,
         headers: {
-          'Content-Type': 'application/json',
-        },
+          "Content-Type": "application/json"
+        }
       };
-      await API.post('todos', '/comments', config);
+      await API.post("todos", "/comments", config);
       fetchComments();
     } catch (err) {
-      console.log('error creating comment:', err);
+      console.log("error creating comment:", err);
     }
   }
 
   async function removeComment(id) {
     try {
-      setComments(comments.filter((comment) => comment.commentId.S !== id));
-      await API.del('todos', `/comments/${id}`);
+      setComments(comments.filter(comment => comment.commentId.S !== id));
+      await API.del("todos", `/comments/${id}`);
     } catch (err) {
-      console.log('error removing comment:', err);
+      console.log("error removing comment:", err);
     }
   }
 
@@ -89,7 +87,7 @@ function CommentsList({ todoId, username }) {
       </HeaderStyle>
       <div>
         <Input
-          onChange={(event) => setInput('content', event.target.value)}
+          onChange={event => setInput("content", event.target.value)}
           value={formState.content}
           placeholder="Comment"
           style={styles.input}
@@ -127,23 +125,24 @@ function CommentsList({ todoId, username }) {
       )}
     </div>
   );
-}
+};
 
 const styles = {
   input: {
-    margin: '10px 0',
+    margin: "10px 0"
   },
   submit: {
-    margin: '10px 0',
-    marginBottom: '20px',
+    margin: "10px 0",
+    marginBottom: "20px"
   },
   header: {
-    paddingLeft: '0px',
+    paddingLeft: "0px"
   },
   comment: {
     width: 300,
-    marginBottom: '50px',
-  },
+    marginBottom: "50px"
+  }
 };
+
 
 export default CommentsList;
