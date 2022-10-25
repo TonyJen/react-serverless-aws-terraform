@@ -6,5 +6,5 @@ test('renders learn react link', () => {
   const { getByText } = render(<App />);
   const x = "To-do list powered by AWS serverless architecture";
   const linkElement = getByText(new RegExp(x, "i"));
-  expect(true);
+  expect(true); 
 });
