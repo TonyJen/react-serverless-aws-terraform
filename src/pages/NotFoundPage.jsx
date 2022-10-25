@@ -1,13 +1,12 @@
-import React from "react";
-import { PageHeader } from "antd";
-import { Layout } from "antd";
+import React from 'react';
+import { PageHeader, Layout } from 'antd';
 
 const { Content } = Layout;
 
-const NotFoundPage = () => {
+function NotFoundPage() {
   return (
     <div>
-      <Content style={{ padding: "0 50px" }}>
+      <Content style={{ padding: '0 50px' }}>
         <div className="site-layout-content">
           <PageHeader
             className="site-page-header"
@@ -19,18 +18,18 @@ const NotFoundPage = () => {
       </Content>
     </div>
   );
-};
+}
 
 const styles = {
   input: {
-    margin: "10px 0",
+    margin: '10px 0',
   },
   submit: {
-    margin: "10px 0",
-    marginBottom: "20px",
+    margin: '10px 0',
+    marginBottom: '20px',
   },
   header: {
-    paddingLeft: "0px",
+    paddingLeft: '0px',
   },
 };
 

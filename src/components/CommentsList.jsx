@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { PageHeader, Spin, Card, Input, Button } from "antd";
 import { API } from "aws-amplify";
 import Likes from "./Likes";

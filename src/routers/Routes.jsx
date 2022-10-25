@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import AboutPage from "../pages/AboutPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import EditTodoPage from "../pages/EditTodoPage";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AboutPage from '../pages/AboutPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import EditTodoPage from '../pages/EditTodoPage';
 
-const Routes = () => {
+function Routes() {
   return (
     <section>
       <Switch>
@@ -14,6 +14,6 @@ const Routes = () => {
       </Switch>
     </section>
   );
-};
+}
 
 export default Routes;
