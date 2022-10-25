@@ -1,38 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { Layout, Card, Button, Spin, Input, PageHeader } from "antd";
-import { Link } from "react-router-dom";
-import { API, Auth } from "aws-amplify";
-import CommentsList from "../components/CommentsList";
+import React, { useEffect, useState } from 'react';
+import {
+  Layout, Card, Button, Spin, Input, PageHeader,
+} from 'antd';
+import { Link } from 'react-router-dom';
+import { API, Auth } from 'aws-amplify';
+import CommentsList from '../components/CommentsList';
 
 const { Content } = Layout;
 
-const EditTodoPage = ({ location, history }) => {
+function EditTodoPage({ location, history }) {
   // form state
-  const initialFormState = { name: "", description: "" };
+  const initialFormState = { name: '', description: '' };
   const [formState, setFormState] = useState(initialFormState);
 
   // todo state
-  const initialTodoState = { name: "", description: "" };
+  const initialTodoState = { name: '', description: '' };
   const [todo, setTodo] = useState(initialTodoState);
 
   // loading state
   const [loadingComplete, setLoadingComplete] = useState(false);
 
   // current username state
-  const [currnetUsername, setCurrnetUsername] = useState("");
+  const [currnetUsername, setCurrnetUsername] = useState('');
 
-  const todoId = location.pathname.split("/")[2];
+  const todoId = location.pathname.split('/')[2];
 
   async function fetchTodo() {
     try {
-      const res = await API.get("todos", `/todos/${todoId}`);
+      const res = await API.get('todos', `/todos/${todoId}`);
       const todo = res.Item;
       const name = todo.name.S;
       const description = todo.description.S;
       setTodo({ name, description });
       setLoadingComplete({ loadingComplete: true });
     } catch (err) {
-      console.log("error fetching todo");
+      console.log('error fetching todo');
     }
   }
 
@@ -42,7 +44,7 @@ const EditTodoPage = ({ location, history }) => {
       setCurrnetUsername(res.username);
     } catch (err) {
       console.log(err);
-      console.log("error fetching current username");
+      console.log('error fetching current username');
     }
   }
 
@@ -52,13 +54,13 @@ const EditTodoPage = ({ location, history }) => {
       const config = {
         body: formState,
         headers: {
-          "Content-Type": "application/json"
-        }
+          'Content-Type': 'application/json',
+        },
       };
-      await API.put("todos", `/todos/${todoId}`, config);
-      history.push("/");
+      await API.put('todos', `/todos/${todoId}`, config);
+      history.push('/');
     } catch (err) {
-      console.log("error updating todo:", err);
+      console.log('error updating todo:', err);
     }
   }
 
@@ -75,15 +77,15 @@ const EditTodoPage = ({ location, history }) => {
   // When todo updates, set form state
   useEffect(() => {
     if (todo.name) {
-      const name = todo.name;
-      const description = todo.description;
+      const { name } = todo;
+      const { description } = todo;
       setFormState({ name, description });
     }
   }, [todo]);
 
   return (
     <div>
-      <Content style={{ padding: "0 50px" }}>
+      <Content style={{ padding: '0 50px' }}>
         <div className="site-layout-content">
           <PageHeader
             className="site-page-header"
@@ -95,13 +97,13 @@ const EditTodoPage = ({ location, history }) => {
           <div>
             <div>
               <Input
-                onChange={event => setInput("name", event.target.value)}
+                onChange={(event) => setInput('name', event.target.value)}
                 value={formState.name}
                 placeholder="Name"
                 style={styles.input}
               />
               <Input
-                onChange={event => setInput("description", event.target.value)}
+                onChange={(event) => setInput('description', event.target.value)}
                 value={formState.description}
                 placeholder="Description"
                 style={styles.input}
@@ -127,23 +129,23 @@ const EditTodoPage = ({ location, history }) => {
       </Content>
     </div>
   );
-};
+}
 
 const styles = {
   input: {
-    margin: "10px 0"
+    margin: '10px 0',
   },
   submit: {
-    margin: "10px 0",
-    marginBottom: "20px"
+    margin: '10px 0',
+    marginBottom: '20px',
   },
   header: {
-    paddingLeft: "0px"
+    paddingLeft: '0px',
   },
   comment: {
     width: 300,
-    marginBottom: "50px"
-  }
+    marginBottom: '50px',
+  },
 };
 
 export default EditTodoPage;

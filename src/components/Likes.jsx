@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "antd";
-import { API } from "aws-amplify";
-import { LikeOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import { Button } from 'antd';
+import { API } from 'aws-amplify';
+import { LikeOutlined } from '@ant-design/icons';
 
-const Likes = ({ commentId, username }) => {
+function Likes({ commentId, username }) {
   const [likes, setLikes] = useState([]);
 
-  const handleOnClickLike = commentId => {
-    const userHasLikedComment =
-      likes.filter(like => like.username.S === username).length > 0;
+  const handleOnClickLike = (commentId) => {
+    const userHasLikedComment = likes.filter((like) => like.username.S === username).length > 0;
     if (!userHasLikedComment) {
       addLike(commentId);
     } else {
@@ -16,39 +15,39 @@ const Likes = ({ commentId, username }) => {
     }
   };
 
-  const addLike = async commentId => {
+  const addLike = async (commentId) => {
     try {
       const config = {
         body: { username, commentId },
         headers: {
-          "Content-Type": "application/json"
-        }
+          'Content-Type': 'application/json',
+        },
       };
-      await API.post("todos", "/likes", config);
+      await API.post('todos', '/likes', config);
       fetchLikesCountByComment(commentId);
     } catch (err) {
-      console.log("error creating like:", err);
+      console.log('error creating like:', err);
     }
   };
 
   async function removeLike() {
-    const likeId = likes.filter(like => like.username.S === username)[0].likeId
+    const likeId = likes.filter((like) => like.username.S === username)[0].likeId
       .S;
     try {
-      setLikes(likes.filter(like => like.likeId.S !== likeId));
-      await API.del("todos", `/likes/${likeId}`);
+      setLikes(likes.filter((like) => like.likeId.S !== likeId));
+      await API.del('todos', `/likes/${likeId}`);
       fetchLikesCountByComment(commentId);
     } catch (err) {
-      console.log("error removing like:", err);
+      console.log('error removing like:', err);
     }
   }
 
-  const fetchLikesCountByComment = async commentId => {
+  const fetchLikesCountByComment = async (commentId) => {
     try {
-      const res = await API.get("todos", `/likes?commentId=${commentId}`);
+      const res = await API.get('todos', `/likes?commentId=${commentId}`);
       setLikes(res.Items);
     } catch (err) {
-      console.log("error fetching likes");
+      console.log('error fetching likes');
     }
   };
 
@@ -61,14 +60,14 @@ const Likes = ({ commentId, username }) => {
       icon={<LikeOutlined />}
       onClick={() => handleOnClickLike(commentId)}
     >
-      {likes.length > 0 ? likes.length : <div style={styles.placeholder}></div>}
+      {likes.length > 0 ? likes.length : <div style={styles.placeholder} />}
     </Button>
   );
-};
+}
 
 const styles = {
   placeholder: {
-    width: "23px"
-  }
+    width: '23px',
+  },
 };
 export default Likes;
