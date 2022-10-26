@@ -23,7 +23,8 @@
     "apply": "cd deploy && terraform apply -var-file .env",
     "deploy": "react-scripts build && cd deploy && terraform apply -var-file .env",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "datadog": "datadog-ci lambda instrument -i"
   },
   "eslintConfig": {
     "extends": "react-app"
