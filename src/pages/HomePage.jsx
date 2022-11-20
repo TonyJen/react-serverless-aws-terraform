@@ -11,12 +11,12 @@ const { Content } = Layout;
 const HomePage = () => {
   const [todos, setTodos] = useState([]);
   const [loadingComplete, setLoadingComplete] = useState(false);
-  const [currnetUsername, setCurrnetUsername] = useState("");
+  const [currentUsername, setCurrentUsername] = useState("");
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
 
   useEffect(() => {
-    fetchCurrnetUsername();
+    fetchCurrentUsername();
     fetchTodos();
   }, []);
 
@@ -35,10 +35,10 @@ const HomePage = () => {
     }
   }
 
-  async function fetchCurrnetUsername() {
+  async function fetchCurrentUsername() {
     try {
       const res = await Auth.currentUserInfo();
-      setCurrnetUsername(res.username);
+      setCurrentUsername(res.username);
     } catch (err) {
       console.log(err);
       console.log("error fetching current username");
@@ -48,7 +48,7 @@ const HomePage = () => {
   async function addTodo() {
     try {
       if (!formState.name || !formState.description) return;
-      const todo = { ...formState, username: currnetUsername };
+      const todo = { ...formState, username: currentUsername };
       setTodos([...todos, todo]);
       setFormState(initialFormState);
 
@@ -80,7 +80,7 @@ const HomePage = () => {
         <div className="site-layout-content">
           <PageHeader
             className="site-page-header"
-            title={`Welcome ${currnetUsername}`}
+            title={`Welcome ${currentUsername}`}
             subTitle="To-do list powered by AWS serverless architecture"
             style={styles.header}
           />
@@ -113,7 +113,7 @@ const HomePage = () => {
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
-                {todo.todoId && todo.username.S === currnetUsername && (
+                {todo.todoId && todo.username.S === currentUsername && (
                   <Button
                     type="primary"
                     onClick={() => removeTodo(todo.todoId.S)}
