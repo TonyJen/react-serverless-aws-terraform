@@ -8,6 +8,7 @@ AWS.config.update({ region: "us-east-1" });
 const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
 exports.handler = function(event, context, callback) {
+  const username = JSON.parse(event.body).username
   const params = {
     TableName: "todos"
   };

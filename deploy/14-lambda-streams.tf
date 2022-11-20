@@ -35,11 +35,29 @@ resource "aws_iam_role" "read_streams_lambda" {
 EOF
 }
 
-resource "aws_lambda_event_source_mapping" "read_streams_mapping" {
+resource "aws_lambda_event_source_mapping" "read_streams_todos_mapping" {
   event_source_arn  = aws_dynamodb_table.todos.stream_arn
   function_name     = aws_lambda_function.read_streams.arn
   starting_position = "LATEST"
 }
+resource "aws_lambda_event_source_mapping" "read_streams_comments_mapping" {
+  event_source_arn  = aws_dynamodb_table.comments.stream_arn
+  function_name     = aws_lambda_function.read_streams.arn
+  starting_position = "LATEST"
+}
+
+resource "aws_lambda_event_source_mapping" "read_streams_likes_mapping" {
+  event_source_arn  = aws_dynamodb_table.likes.stream_arn
+  function_name     = aws_lambda_function.read_streams.arn
+  starting_position = "LATEST"
+}
+
+resource "aws_lambda_event_source_mapping" "read_streams_sqsRequests_mapping" {
+  event_source_arn  = aws_dynamodb_table.sqsRequests.stream_arn
+  function_name     = aws_lambda_function.read_streams.arn
+  starting_position = "LATEST"
+}
+
 
 resource "aws_iam_role" "read_streams_role" {
   name               = "read_streams_role"
@@ -83,8 +101,10 @@ resource "aws_iam_role_policy" "dynamodb_read_log_policy" {
                     "dynamodb:ListStreams" ],
         "Effect": "Allow",
         "Resource": [
-          "${aws_dynamodb_table.todos.arn}",
-          "${aws_dynamodb_table.todos.arn}/*"
+          "${aws_dynamodb_table.todos.arn}/*",
+          "${aws_dynamodb_table.comments.arn}/*",
+          "${aws_dynamodb_table.likes.arn}/*",
+          "${aws_dynamodb_table.sqsRequests.arn}/*"
         ]
     }
   ]

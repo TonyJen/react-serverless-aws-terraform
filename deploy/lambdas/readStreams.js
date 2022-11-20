@@ -1,7 +1,7 @@
 
 exports.handler = async event => {
-  console.log(JSON.parse(event))
-  for (var record in event['Records']) {
-    console.log(JSON.parse(record))
-  }
+  console.log(event)
+  event.Records.forEach((record) => {
+    console.log('Stream record: ', JSON.stringify(record, null, 2))
+  })
 }
