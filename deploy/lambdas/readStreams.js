@@ -1,6 +1,7 @@
 
 exports.handler = async event => {
+  console.log(JSON.parse(event))
   for (var record in event['Records']) {
-    console.log(record)
+    console.log(JSON.parse(record))
   }
 }
