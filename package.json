@@ -18,12 +18,12 @@
     "styled-components": "^5.3.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
     "apply": "cd deploy && terraform apply -var-file .env",
-    "deploy": "react-scripts build && cd deploy && terraform apply -var-file .env",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "deploy": "react-scripts --openssl-legacy-provider build && cd deploy && terraform apply -var-file .env",
+    "test": "react-scripts --openssl-legacy-provider test",
+    "eject": "react-scripts --openssl-legacy-provider eject",
     "datadog": "datadog-ci lambda instrument -i"
   },
   "eslintConfig": {
