@@ -94,14 +94,14 @@ const HomePage = () => {
         <div>
           <Input
             onChange={event => setInput("name", event.target.value)}
-            onKeyDown={this.handleKeyDown} 
+            onKeyDown={handleKeyDown} 
             value={formState.name}
             placeholder="Name"
             style={styles.input}
           />
           <Input
             onChange={event => setInput("description", event.target.value)}
-            onKeyDown={this.handleKeyDown} 
+            onKeyDown={handleKeyDown} 
             value={formState.description}
             placeholder="Description"
             style={styles.input}
