@@ -65,6 +65,12 @@ const HomePage = () => {
     }
   }
 
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      addTodo();
+    }
+  }
+
   async function removeTodo(id) {
     try {
       setTodos(todos.filter(todo => todo.todoId.S !== id));
@@ -88,12 +94,14 @@ const HomePage = () => {
         <div>
           <Input
             onChange={event => setInput("name", event.target.value)}
+            onKeyDown={this.handleKeyDown} 
             value={formState.name}
             placeholder="Name"
             style={styles.input}
           />
           <Input
             onChange={event => setInput("description", event.target.value)}
+            onKeyDown={this.handleKeyDown} 
             value={formState.description}
             placeholder="Description"
             style={styles.input}
