@@ -4,6 +4,9 @@ terraform {
     aws = {
       version = "~> 4.34.0"
     }
+    datadog = {
+      source = "DataDog/datadog"
+    }
   }
 }
 

@@ -11,6 +11,8 @@ const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 exports.handler = function(event, context, callback) {
   let responseCode = 200;
   let responseBody = "";
+  
+  const cognitoIdentityId = event.requestContext.identity.cognitoIdentityId;
   const params = {
     TableName: "todos",
     Item: {

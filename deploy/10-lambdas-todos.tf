@@ -112,6 +112,7 @@ resource "aws_lambda_function" "create_todo" {
   filename      = "lambdas/createTodo.zip"
   handler       = "createTodo.handler"
   runtime       = "nodejs16.x"
+  reserved_concurrent_executions = 1
   role          = aws_iam_role.lambda_exec.arn
 }
 

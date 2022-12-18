@@ -17,6 +17,7 @@ exports.handler = (event, context, callback) => {
     let responseBody = "";
 
     const params = {
+      ConsistentRead: true,
       ExpressionAttributeValues: {
         ":v1": {
           S: todoId

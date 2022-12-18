@@ -12,11 +12,13 @@ exports.handler = (event, context, callback) => {
   // query likes by commentId
   // else, scan for all likes
   if (event.queryStringParameters) {
+    
     const commentId = event.queryStringParameters.commentId;
     let responseCode = 200;
     let responseBody = "";
 
     const params = {
+      ConsistentRead: true,
       ExpressionAttributeValues: {
         ":v1": {
           S: commentId

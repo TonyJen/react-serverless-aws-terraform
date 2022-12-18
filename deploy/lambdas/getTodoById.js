@@ -12,6 +12,7 @@ exports.handler = (event, context, callback) => {
   let responseCode = 200;
   let responseBody = "";
   const params = {
+    ConsistentRead: true,
     Key: {
       todoId: {
         S: todoId

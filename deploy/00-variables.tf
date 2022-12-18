@@ -24,3 +24,7 @@ variable "bucket_name" {
   description = "The name of the bucket without the www. prefix. Normally domain_name."
 }
 
+variable datadog_api_key {}
+
+variable datadog_app_key {}
+
