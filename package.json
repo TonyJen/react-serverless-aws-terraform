@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "react-scripts build",
     "apply": "cd deploy && terraform apply -var-file .env",
     "deploy": "react-scripts --openssl-legacy-provider build && cd deploy && terraform apply -var-file .env",
     "test": "react-scripts --openssl-legacy-provider test",
