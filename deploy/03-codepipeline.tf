@@ -28,7 +28,7 @@ resource "aws_codepipeline" "app" {
       configuration = {
         Owner      = var.github_username
         Repo       = var.github_project_name
-        Branch     = "dev"
+        Branch     = "main"
         OAuthToken = var.github_token
       }
     }
