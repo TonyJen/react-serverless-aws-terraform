@@ -17,29 +17,40 @@ exports.handler = async function(event, context, callback) {
   event.Records.forEach(record => {
     const { body } = record;
     console.log(body);
-
-    const params = {
-      TableName: "sqsRequests",
-      Item: {
-        todoId: { S: JSON.parse(body).todoId },
-        identityId: { S: JSON.parse(body).identityId },
-        timeStamp: { S: new Date().toISOString() },
-        name: { S: JSON.parse(body).name },
-        description: { S: JSON.parse(body).description },
-        source: { S: JSON.parse(body).source }
-      }
-    };
+    if (!JSON.parse(body).todoId) {
+      console.log('incorrect data: not saving')
+      return;
+    }
+    
+    try {
+      const params = {
+        TableName: "sqsRequests",
+        Item: {
+          todoId: { S: JSON.parse(body).todoId },
+          identityId: { S: JSON.parse(body).identityId },
+          timeStamp: { S: new Date().toISOString() },
+          name: { S: JSON.parse(body).name },
+          description: { S: JSON.parse(body).description },
+          source: { S: JSON.parse(body).source }
+        }
+      };
+    
        // Call DynamoDB to add the item to the table
-    ddb.putItem(params, function(err, data) {
-      if (err) {
-        console.log("Error", err);
-        responseCode = 500;
-        responseBody = err;
-      } else {
-        console.log("Success", data);
-        responseBody = data;
-      }
-    });
+      ddb.putItem(params, function(err, data) {
+        if (err) {
+          console.log("Error", err);
+          responseCode = 500;
+          responseBody = err;
+        } else {
+          console.log("Success", data);
+          responseBody = data;
+        }
+      });
+    }
+    catch (e){
+      console.log('error writing to db ' + e.message)
+      return
+    }
   });
 
   const response = {
