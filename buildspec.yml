@@ -4,6 +4,8 @@ phases:
   install:
     commands:
       - echo Installing Node 18...
+      - apt update
+      - apt upgrade
       - curl -sL https://deb.nodesource.com/setup_18.x | bash -
       - apt install -y nodejs
       - unset NODE_OPTIONS
