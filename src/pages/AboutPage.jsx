@@ -25,6 +25,7 @@ const AboutPage = () => {
           <li> Api gateway</li>
           <li> Lambda</li>
           <li> Simple Queue Service</li>
+          <li> DynamoDB</li>
         </ul>
       </Content>
     </div>
