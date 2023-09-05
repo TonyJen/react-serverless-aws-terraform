@@ -18,8 +18,8 @@ const AboutPage = () => {
         <h1>
         This demo showcases an AWS serverless pipeline with a React frontend and a DynamoDB backend. 
         It utilizes technologies including Cognito for access control, API Gateway, Lambda, Simple Queue Service, and DynamoDB.</h1>
-
-        <ul>Technologies Used:
+        <h1>Technologies Used:</h1>
+        <ul>
           <li>Amazon Cognito: Utilized for access control and authentication.</li>
           <li>API Gateway: Manages and routes API calls.</li>
           <li>AWS Lambda: Provides serverless compute capabilities, executing code in response to events.</li>
