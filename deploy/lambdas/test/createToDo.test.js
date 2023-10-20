@@ -1,45 +1,63 @@
-const createTodo = require("../createTodo");
-const AWSMock = require("aws-sdk-mock");
-const AWS = require("aws-sdk")
+const createTodo = require('./createTodo.js');
 
-describe("createTodo", () => {
-  beforeEach(() => {
-    AWS.config.update({ region: 'us-east-1' });
-    AWSMock.mock("DynamoDB", "putItem", (params, callback) => {
-      const response = {
-        statusCode: 200,
-        headers: {
-          "content-type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        },
-        body: JSON.stringify({ message: "Todo created successfully" })
-      };
-      callback(null, response);
-    });
-  });
+// Mocked SQS sendMessage function
+const mockSendMessage = jest.fn((params, callback) => {
+  if (params.MessageBody === 'success') {
+    callback(null, 'Success');
+  } else {
+    callback('Failure');
+  }
+});
 
-  afterEach(() => {
-    AWSMock.restore("DynamoDB");
-  });
+// Mocked DynamoDB putItem function
+const mockPutItem = jest.fn((params, callback) => {
+  if (params.Item.text === 'success') {
+    callback(null, 'Success');
+  } else {
+    callback('Failure');
+  }
+});
 
-  it("should return success message when todo is created", () => {
+// Mock the SQS and DynamoDB clients
+jest.mock('aws-sdk', () => ({
+  SQS: jest.fn(() => ({
+    sendMessage: mockSendMessage,
+  })),
+  DynamoDB: {
+    DocumentClient: jest.fn(() => ({
+      put: mockPutItem,
+    })),
+  },
+}));
+
+describe('createTodo', () => {
+  it('should create a new todo successfully', async () => {
     const event = {
       body: JSON.stringify({
-        todoId: "123",
-        todoName: "Example Todo",
+        text: 'success',
       }),
-      requestContext: {
-        identity: {
-          cognitoIdentityId: "123"
-        }
-      }
-    };
-    const context = {};
-    const callback = (error, response) => {
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual('{"message":"Todo created successfully"}');
     };
 
-    createTodo.handler(event, context, callback);
+    const result = await createTodo.main(event);
+
+    expect(result.statusCode).toEqual(200);
+    expect(result.body).toEqual(JSON.stringify('Success'));
+    expect(mockSendMessage).toBeCalledTimes(1);
+    expect(mockPutItem).toBeCalledTimes(1);
+  });
+
+  it('should handle failure when creating todo', async () => {
+    const event = {
+      body: JSON.stringify({
+        text: 'failure',
+      }),
+    };
+
+    const result = await createTodo.main(event);
+
+    expect(result.statusCode).toEqual(500);
+    expect(result.body).toEqual(JSON.stringify('Failure'));
+    expect(mockSendMessage).toBeCalledTimes(1);
+    expect(mockPutItem).toBeCalledTimes(1);
   });
 });
