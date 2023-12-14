@@ -18,6 +18,13 @@ resource "aws_cognito_user_pool" "app_user_pool" {
     required            = true
   }
 
+  account_recovery_setting {
+    recovery_mechanism {
+      name     = "verified_email"
+      priority = 1
+    }
+  }
+
   lifecycle {
     ignore_changes = [
       schema ### AWS doesn't allow schema updates, so every build will re-create the user pool unless we ignore this bit
