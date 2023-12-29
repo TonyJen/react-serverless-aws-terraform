@@ -40,3 +40,7 @@ deploy/.terraform.lock.hcl
 .history/*
 .env
 import
+awscliv2.zip
+aws/install
+aws/README.md
+aws/THIRD_PARTY_LICENSES
