@@ -10,7 +10,7 @@
     "antd": "^4.19.2",
     "aws-amplify": "^5.3.15",
     "axios": "^1.6.4",
-    "concat-map": "^0.0.1",
+    "concat-map": "^0.0.2",
     "cross-env": "^7.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.7",
